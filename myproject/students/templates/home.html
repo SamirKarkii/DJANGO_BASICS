@@ -1,6 +1,5 @@
-<h1>Welcome to Django</h1>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium quam et labore impedit accusamus ad incidunt aliquam, 
-    voluptas aliquid ab numquam iste a vitae, placeat maxime ipsam deserunt delectus nulla!</p>
+<h1>Students List</h1>
 
-<h3>Hello{{name}}</h3>
-<p>{{age}}</p>
+{% for student in students %}
+    <p>{{ student.name }} - {{ student.age }}</p>
+{% endfor %}

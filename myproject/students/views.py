@@ -18,5 +18,5 @@ def students(request):
 
 def student(request):
     data = Student.objects.all()
-    return render(request,'students.html', {})
+    return render(request,'students.html', {'students':data})
 
