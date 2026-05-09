@@ -1,0 +1,10 @@
+# Ignore the virtual environment
+venv/
+pyvenv.cfg
+
+# Ignore Python bytecode
+**/__pycache__/
+*.pyc
+
+# Ignore the local database (optional, but recommended if using PostgreSQL later)
+db.sqlite3

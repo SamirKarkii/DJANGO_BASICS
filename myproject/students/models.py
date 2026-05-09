@@ -29,5 +29,11 @@ class Course(models.Model):
         return self.name
 
 class Student(models.Model):
+    age = models.IntegerField(default=0)
     address = models.CharField(max_length=100)
     course = models.ForeignKey(Course,on_delete=models.CASCADE)
+
+# Course.objects.create(name ="Python")
+# course_obj = Course.objects.get(name="Python")
+# Student.objects.create(age=14, address="Kathmandu", course_obj")
+# Student.objects.all()
