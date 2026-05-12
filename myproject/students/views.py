@@ -82,20 +82,67 @@
 
 
 
+# from django.views import View
+# from django.http import HttpResponse
+# from .models import Student,Course
+
+
+# #Simple Classed Based Views 
+# class StudentListView(View):
+#     def get(self,request):
+#         students = Student.objects.all()
+
+#         data = []
+#         for s in students:
+#             data.append(f"{s.address}-{s.id}")
+#         return HttpResponse(",".join(data))
+
+
+# #Generic 
+# from django.views.generic import ListView
+# from .models import Student
+
+# class StudentListView(ListView):
+#     model = Student
+
+
+# #Mixin
+# from .models import Student
+# from django.http import HttpRequest
+# from django.contrib.auth.mixins import LoginRequiredMixin
+# from django.views import View
+# from django.views.generic import ListView
+
+# # class StudentListView(LoginRequiredMixin,ListView):
+# #     model = Student
+
+
+
+
+
+# from django.views import View
+# from django.http import HttpResponse
+# from .models import Student
+
+# class StudentDetaiView(View):
+#     def get(self,request,id):
+#         try: 
+#             student = Student.objects.get(id=id)
+
+#             data = f'{student.id}-{student.address}-{student.age}'
+#             return HttpResponse(data)
+        
+#         except Student.DoesNotExist:
+#             return HttpResponse("Student not found suiii")
+
+
 from django.views import View
 from django.http import HttpResponse
 from .models import Student,Course
 
-
-#Simple Classed Based Views 
-class StudentListView(View):
-    def get(self,request):
-        students = Student.objects.all()
-
-        data = []
-        for s in students: 
-            data.append(f'{s.id}-{s.address}')
-        return HttpResponse(",".join(data))
-    
+class StudentCreateView(View):
     def post(self,request):
-        return HttpResponse("post request")
+        a = Course.objects.first()
+        Student.objects.create(age=10,address="Bisbain",course=a)
+
+        return HttpResponse("Student Created")
