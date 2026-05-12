@@ -136,13 +136,45 @@
 #             return HttpResponse("Student not found suiii")
 
 
+# from django.views import View
+# from django.http import HttpResponse
+# from .models import Student,Course
+
+# class StudentCreateView(View):
+#     def post(self,request):
+#         a = Course.objects.first()
+#         Student.objects.create(age=10,address="Bisbain",course=a)
+
+#         return HttpResponse("Student Created")
+
+
+# from django.views import View
+# from .models import Student
+# from django.http import HttpResponse
+
+# class SearchStudentView(View):
+#     def get(self, request):
+
+#         address_from_url = request.GET.get("address")
+
+#         print("INPUT FROM URL:", repr(address_from_url))
+
+#         data = Student.objects.filter(address__icontains=address_from_url)
+
+#         print("RESULT:", list(data))
+
+#         return HttpResponse(
+#             ", ".join([s.address for s in data]) if data else "No match found"
+#         )
+
 from django.views import View
 from django.http import HttpResponse
-from .models import Student,Course
+from .models import Student
 
-class StudentCreateView(View):
-    def post(self,request):
-        a = Course.objects.first()
-        Student.objects.create(age=10,address="Bisbain",course=a)
+class StudentSearchView(View):
+    def get(self, request):
+        address = request.GET.get("address")
 
-        return HttpResponse("Student Created")
+        students = Student.objects.filter(address=address)
+
+        return HttpResponse(students)
