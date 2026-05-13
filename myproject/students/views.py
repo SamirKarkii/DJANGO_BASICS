@@ -167,14 +167,49 @@
 #             ", ".join([s.address for s in data]) if data else "No match found"
 #         )
 
+# from django.views import View
+# from django.http import HttpResponse
+# from .models import Student
+
+# # class StudentSearchView(View):
+# #     def get(self, request):
+# #         address = request.GET.get("address")
+
+# #         students = Student.objects.filter(address=address)
+
+# #         return HttpResponse(students)
+
+# from django.views import View
+# from django.http import HttpResponse
+# from .models import Student, Course
+# from django.utils.decorators import method_decorator
+# from django.views.decorators.csrf import csrf_exempt
+
 from django.views import View
 from django.http import HttpResponse
-from .models import Student
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 
-class StudentSearchView(View):
-    def get(self, request):
-        address = request.GET.get("address")
+from .models import Student, Course
 
-        students = Student.objects.filter(address=address)
+@method_decorator(csrf_exempt, name='dispatch')
+class CreateStudent(View):
 
-        return HttpResponse(students)
+    def post(self, request):
+
+        age = request.POST.get("age")
+        address = request.POST.get("address")
+        course_id = request.POST.get("course_id")
+
+        try: 
+            selected_course = Course.objects.get(id=course_id)
+            Student.objects.create(
+                age = age,
+                address = address,
+                course = selected_course
+            )
+            return HttpResponse("Student Successfully Created")
+        
+        except Course.DoesNotExist:
+            return HttpResponse("Course Not found mate")
+
