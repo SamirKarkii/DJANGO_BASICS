@@ -185,31 +185,54 @@
 # from django.utils.decorators import method_decorator
 # from django.views.decorators.csrf import csrf_exempt
 
+# from django.views import View
+# from django.http import HttpResponse
+# from django.utils.decorators import method_decorator
+# from django.views.decorators.csrf import csrf_exempt
+
+# from .models import Student, Course
+
+# @method_decorator(csrf_exempt, name='dispatch')
+# class CreateStudent(View):
+
+#     def post(self, request):
+
+#         age = request.POST.get("age")
+#         address = request.POST.get("address")
+#         course_id = request.POST.get("course_id")
+
+#         try: 
+#             selected_course = Course.objects.get(id=course_id)
+#             Student.objects.create(
+#                 age = age,
+#                 address = address,
+#                 course = selected_course
+#             )
+#             return HttpResponse("Student Successfully Created")
+        
+#         except Course.DoesNotExist:
+#             return HttpResponse("Course Not found mate")
+
+
 from django.views import View
 from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
 from .models import Student, Course
-
 @method_decorator(csrf_exempt, name='dispatch')
-class CreateStudent(View):
-
-    def post(self, request):
-
-        age = request.POST.get("age")
-        address = request.POST.get("address")
-        course_id = request.POST.get("course_id")
-
-        try: 
-            selected_course = Course.objects.get(id=course_id)
-            Student.objects.create(
-                age = age,
-                address = address,
-                course = selected_course
-            )
-            return HttpResponse("Student Successfully Created")
+class UpdateStudent(View):
+    def post(self,request,id):
+        try:
+            student = Student.objects.get(id=id)
+        except Student.DoesNotExist:
+            return HttpResponse("Student Not Found")
         
-        except Course.DoesNotExist:
-            return HttpResponse("Course Not found mate")
+        new_address = request.POST.get("address")
+        if new_address: 
+            student.address = new_address
+            student.save ()
 
+            return HttpResponse("Student Updated")
+        
+        return HttpResponse("No address  provided ")

@@ -24,9 +24,9 @@
 
 
 from django.urls import path
-from .views import CreateStudent
+from .views import UpdateStudent
 
 urlpatterns = [
-    path('search/',CreateStudent.as_view()),
+    path('search/<int:id>/',UpdateStudent.as_view()),
     
 ]
