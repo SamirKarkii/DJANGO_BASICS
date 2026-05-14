@@ -23,10 +23,17 @@
 # ]
 
 
-from django.urls import path
-from .views import UpdateStudent
+# from django.urls import path
+# from .views import DeleteStudent
+# from .api_views import HelloAPIView
+# urlpatterns = [
+#     path('search/<int:id>/',DeleteStudent.as_view()),
+#  path('hello-api/', HelloAPIView.as_view()),
+# ]
 
+from django.urls import path
+from .api_views import StudentListViewAPI  
 urlpatterns = [
-    path('search/<int:id>/',UpdateStudent.as_view()),
-    
+ path('hello-api/', StudentListViewAPI.as_view()),
 ]
+

@@ -214,25 +214,41 @@
 #             return HttpResponse("Course Not found mate")
 
 
-from django.views import View
-from django.http import HttpResponse
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt
+# from django.views import View
+# from django.http import HttpResponse
+# from django.utils.decorators import method_decorator
+# from django.views.decorators.csrf import csrf_exempt
 
-from .models import Student, Course
-@method_decorator(csrf_exempt, name='dispatch')
-class UpdateStudent(View):
-    def post(self,request,id):
-        try:
-            student = Student.objects.get(id=id)
-        except Student.DoesNotExist:
-            return HttpResponse("Student Not Found")
+# from .models import Student, Course
+# @method_decorator(csrf_exempt, name='dispatch')
+# class UpdateStudent(View):
+#     def post(self,request,id):
+#         try:
+#             student = Student.objects.get(id=id)
+#         except Student.DoesNotExist:
+#             return HttpResponse("Student Not Found")
         
-        new_address = request.POST.get("address")
-        if new_address: 
-            student.address = new_address
-            student.save ()
+#         new_address = request.POST.get("address")
+#         if new_address: 
+#             student.address = new_address
+#             student.save ()
 
-            return HttpResponse("Student Updated")
+#             return HttpResponse("Student Updated")
         
-        return HttpResponse("No address  provided ")
+#         return HttpResponse("No address  provided ")
+
+# from django.views import View
+# from .models import Student,Course
+# from django.http import HttpResponse
+# from django.utils.decorators import method_decorator
+# from django.views.decorators.csrf import csrf_exempt
+
+# @method_decorator(csrf_exempt, name='dispatch')
+# class DeleteStudent(View):
+#     def delete(self,request,id):
+#         try:
+#             student = Student.objects.get(id=id)
+#         except Student.DoesNotExist:
+#             return HttpResponse("Student doesnot exist")
+#         student.delete()
+#         return HttpResponse("Student Deleted")
