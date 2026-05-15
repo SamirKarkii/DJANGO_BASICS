@@ -31,9 +31,23 @@
 #  path('hello-api/', HelloAPIView.as_view()),
 # ]
 
-from django.urls import path
-from .api_views import StudentListViewAPI  
-urlpatterns = [
- path('hello-api/', StudentListViewAPI.as_view()),
-]
+# from django.urls import path
+# from .api_views import StudentListViewAPI  
+# urlpatterns = [
+#  path('hello-api/', StudentListViewAPI.as_view()),
+# ]
 
+
+
+# from django.urls import path
+# from .api_views import StudentCreateAPIView
+# urlpatterns = [
+#  path('create-api/', StudentCreateAPIView.as_view()),
+# ]
+
+from django.urls import path
+from .api_views import StudentDeleteAPIViwe
+
+urlpatterns = [
+   path('update-api/<int:id>/', StudentDeleteAPIViwe.as_view()),
+]
